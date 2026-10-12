@@ -88,7 +88,7 @@ function sourceFile() {
 #     assertFileContains foo/bar.txt "this line exists"
 #
 function assertFileContains() {
-    if ! grep -qF "$2" "$(_abs "$1")"; then
+    if ! grep -qF -- "$2" "$(_abs "$1")"; then
         fail "Expected $1 to contain $2 but it did not."
     fi
 }
@@ -100,7 +100,7 @@ function assertFileContains() {
 #     assertFileRegex foo/bar.txt "^this line exists$"
 #
 function assertFileRegex() {
-    if ! grep -q "$2" "$(_abs "$1")"; then
+    if ! grep -q -- "$2" "$(_abs "$1")"; then
         fail "Expected $1 to match $2 but it did not."
     fi
 }
@@ -112,7 +112,7 @@ function assertFileRegex() {
 #     assertFileNotRegex foo/bar.txt "^this line is missing$"
 #
 function assertFileNotRegex() {
-    if grep -q "$2" "$(_abs "$1")"; then
+    if grep -q -- "$2" "$(_abs "$1")"; then
         fail "Expected $1 to not match $2 but it did."
     fi
 }
